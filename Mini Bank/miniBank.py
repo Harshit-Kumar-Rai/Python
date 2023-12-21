@@ -102,7 +102,41 @@ class Bank:
       # print("Something went wrong...")
       print(e)
 
-  
+  def sub_menu(self):
+
+    if self.acc_details['user_details']['is_active'] == True:
+
+      choice = int(input('''\n\n\t\t\tPlease Choose option below
+                            Press [1] to deposit
+                            Press [2] check balance
+                            Press [3] withdraw 
+                            Press [4] Main Menu 
+                            Press [5] Log Out
+                            Press [6] to exit'''))
+      if choice == 1:
+        self.deposit()
+        self.sub_menu()
+      elif choice == 2:
+        self.avilabel_balance()
+        self.sub_menu()
+      elif choice == 3:
+        self.withdraw()
+        self.sub_menu()
+      elif choice == 4:
+        self.menu()
+      elif choice == 5:
+        self.acc_details['user_details']['is_active'] == False
+
+        print("\t\t\t\nPlease Wait...")
+        time.sleep(3)
+        print("\t\t\t\n\nYour are loged out successfully go back to login...")
+        time.sleep(2)
+        self.menu()
+      else:
+        exit()
+    else:
+      print("Sorry Your account is not activated or you are not loged in ...")
+    
   def menu(self):
     choice = int(input('''\n\n\t\t\t!! Welcome to the Mini Bank !!\n
                        Please Choose option below
@@ -120,23 +154,10 @@ class Bank:
 
       check = self.login(account_number, password)
       if check:
+        self.sub_menu()
+      else:
+        print("Inavlaid Password..")
         
-        choice = int(input('''\n\n\t\t\tPlease Choose option below
-                           Press [1] to deposit
-                           Press[2] check balance
-                           Press [3] withdraw 
-                           Press [4] Exit '''))
-        if choice == 1:
-          self.deposit()
-          self.menu()
-        elif choice == 2:
-          self.avilabel_balance()
-          self.menu()
-        elif choice == 3:
-          self.withdraw()
-          self.menu()
-        else:
-          exit()
     else:
       print("Thankyou for banking...")
       exit()
